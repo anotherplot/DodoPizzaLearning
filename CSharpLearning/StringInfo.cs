@@ -2,22 +2,18 @@ namespace CSharpLearning
 {
     public class StringInfo
     {
-        private char firstChar;
-        private int length;
-
-        public char FirstChar => firstChar;
-
-        public int Length => length;
+        public char FirstChar { get; }
+        public int Length { get; }
 
         public StringInfo(char firstChar, int length)
         {
-            this.firstChar = firstChar;
-            this.length = length;
+            FirstChar = firstChar;
+            Length = length;
         }
 
         public override string ToString()
         {
-            return $"First char: {firstChar}. String length: {length}";
+            return $"First char: {FirstChar}. String length: {Length}";
         }
     }
 }

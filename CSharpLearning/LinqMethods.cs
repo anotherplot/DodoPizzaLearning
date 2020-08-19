@@ -6,19 +6,25 @@ namespace CSharpLearning
 {
     public class LinqMethods
     {
-        public static IEnumerable<string> StartsWithChar(List<string> randomStrings, char c)
+        public static IEnumerable<string> GetStringsStartingWithChar(IEnumerable<string> randomStrings, char c)
         {
-            return randomStrings.Where(_ => _.StartsWith(Char.ToLower(c)));
+            return randomStrings.Where(s => s.StartsWith(c));
         }
 
-        public static IEnumerable<string> StringsWithLength(List<string> randomString, int length)
+        public static IEnumerable<string> GetStringsWithMinLength(IEnumerable<string> randomStrings, int length)
         {
-            return randomString.Where(_ => _.Length == length);
+            return randomStrings.Where(s => s.Length >= length);
         }
 
-        public static List<StringInfo> SelectStartCharWithStringLength(List<string> randomString)
+        public static List<StringInfo> GetStringInfo(List<string> randomStrings)
         {
-            return randomString.Select(s => new StringInfo(s[0], s.Length)).ToList();
+            return randomStrings.Select(s => new StringInfo(s[0], s.Length)).ToList();
+        }     
+        
+        public static IEnumerable<string> GetDatesInLongStrings(List<DateTime> dates)
+        {
+            return dates.Select(d => d.ToLongDateString());
+            
         }
 
         public static int GetAllStringsLength(List<string> randomString)
