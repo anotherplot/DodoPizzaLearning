@@ -81,6 +81,15 @@ namespace DodoPizzaLearningTests
             var result = LinqMethods.GetDatesInLongStrings(_dates);
 
             Assert.AreEqual(expectedResult, result);
+        }       
+        
+        [Test]
+        public void CheckGetDateTimeYearsInString()
+        {
+            var expectedResult = "2020;1900;";
+            var result = LinqMethods.GetDateTimeYearsInString(_dates);
+
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }

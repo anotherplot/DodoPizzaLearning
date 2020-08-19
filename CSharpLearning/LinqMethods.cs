@@ -31,6 +31,11 @@ namespace CSharpLearning
         {
             return randomString.Aggregate(0, (result, item) => result + item.Length);
         }
+        
+        public static string GetDateTimeYearsInString(List<DateTime> dates)
+        {
+            return dates.Aggregate("",(result, item) => result + item.Year + ";");
+        }
 
     }
 }
