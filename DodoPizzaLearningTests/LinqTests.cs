@@ -18,7 +18,7 @@ namespace DodoPizzaLearningTests
 
             _dates = new List<DateTime>
             {
-                new DateTime(2020, 6, 1, 7, 47, 0), 
+                new DateTime(2020, 6, 1, 7, 47, 0),
                 new DateTime(1900, 1, 12, 3, 1, 1)
             };
         }
@@ -30,7 +30,7 @@ namespace DodoPizzaLearningTests
         {
             var result = LinqMethods.GetStringsStartingWithChar(_randomStrings, c);
             var expectedResult = new List<string>() {word};
-            
+
             Assert.AreEqual(expectedResult, result);
         }
 
@@ -39,7 +39,7 @@ namespace DodoPizzaLearningTests
         {
             var result = LinqMethods.GetStringsWithMinLength(_randomStrings, 6);
             var expectedResult = new List<string>() {"caterpillar", "monkey", "summer"};
-            
+
             Assert.AreEqual(expectedResult, result);
         }
 
@@ -56,7 +56,7 @@ namespace DodoPizzaLearningTests
                 new StringInfo('s', 6),
             };
             var result = LinqMethods.GetStringInfo(_randomStrings);
-            
+
             Assert.AreEqual(expectedResult.Count, result.Count);
             for (var i = 0; i < expectedResult.Count; i++)
             {
@@ -81,8 +81,8 @@ namespace DodoPizzaLearningTests
             var result = LinqMethods.GetDatesInLongStrings(_dates);
 
             Assert.AreEqual(expectedResult, result);
-        }       
-        
+        }
+
         [Test]
         public void CheckGetDateTimeYearsInString()
         {
