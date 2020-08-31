@@ -5,10 +5,12 @@ namespace CSharpLearning
 {
     public static class MyLinqExtension
     {
-        public delegate bool MyAggregateDelegate<TSource>(TSource source);
+        public delegate bool MyWhereDelegate<in TSource>(TSource source);
+
+        public delegate TResult MySelectDelegate<TSource, TResult>(TSource source);
 
         public static IEnumerable<TSource> MyWhere<TSource>(this IEnumerable<TSource> source,
-            MyAggregateDelegate<TSource> predicate)
+            MyWhereDelegate<TSource> predicate)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -23,6 +25,18 @@ namespace CSharpLearning
             }
 
             return resultList;
+        }
+
+        public static IEnumerable<TResult> MySelect<TResult, TSource>(this IEnumerable<TSource> source,
+            MySelectDelegate<TSource, TResult> predicate)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+            foreach (var element in source)
+            {
+                yield return predicate(element);
+            }
         }
 
 
