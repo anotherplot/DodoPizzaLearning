@@ -38,19 +38,27 @@ namespace CSharpLearning
 
         public static Sale GetHighestSoldProduct(IEnumerable<Sale> sales, DateTime saleDate)
         {
-            var highestSoldProduct = sales.Where(sale => sale.SaleDate == saleDate)
-                .GroupBy(sale => sale.ProductName)
-                .Select(groups => new Sale()
-                {
-                    ProductName = groups.Key,
-                    Amount = groups.Sum(sale => sale.Amount),
-                    SaleDate = saleDate
-                })
-                .Aggregate((i1, i2) => i1.Amount > i2.Amount ? i1 : i2);
+            Sale highestSoldProduct = null;
+            try
+            {
+                highestSoldProduct = sales.Where(sale => sale.SaleDate == saleDate)
+                    .GroupBy(sale => sale.ProductName)
+                    .Select(groups => new Sale()
+                    {
+                        ProductName = groups.Key,
+                        Amount = groups.Sum(sale => sale.Amount),
+                        SaleDate = saleDate
+                    })
+                    .Aggregate((i1, i2) => i1.Amount > i2.Amount ? i1 : i2);
 
-            Console.WriteLine(
-                $"Highest sold product on {highestSoldProduct.SaleDate} was: {highestSoldProduct.ProductName}, number of sold items: {highestSoldProduct.Amount}");
-            
+                Console.WriteLine(
+                    $"Highest sold product on {highestSoldProduct.SaleDate} was: {highestSoldProduct.ProductName}, number of sold items: {highestSoldProduct.Amount}");
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             return highestSoldProduct;
         }
     }

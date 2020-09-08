@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using CSharpLearning;
 using NUnit.Framework;
 
@@ -55,6 +54,14 @@ namespace DodoPizzaLearningTests
             var highestSoldProduct = LinqMethods.GetHighestSoldProduct(_sales, salesDate);
             Assert.AreEqual(productName, highestSoldProduct.ProductName);
             Assert.AreEqual(amount, highestSoldProduct.Amount);
+        }
+
+        [Test]
+        [TestCase("2021-5-14", "Margheritta", 1)]
+        public void ShouldReturnNull_WhenNoSalesFound(DateTime salesDate, string productName, int amount)
+        {
+            var highestSoldProduct = LinqMethods.GetHighestSoldProduct(_sales, salesDate);
+            Assert.IsNull(highestSoldProduct);
         }
     }
 }
