@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSharpLearning
 {
@@ -8,6 +9,8 @@ namespace CSharpLearning
         public delegate bool MyWhereDelegate<in TSource>(TSource source);
 
         public delegate TResult MySelectDelegate<TSource, TResult>(TSource source);
+
+        public delegate TResult MyMaxDelegate<TSource, TResult>(TSource source);
 
         public static IEnumerable<TSource> MyWhere<TSource>(this IEnumerable<TSource> source,
             MyWhereDelegate<TSource> predicate)
@@ -37,6 +40,26 @@ namespace CSharpLearning
             {
                 yield return predicate(element);
             }
+        }
+
+        public static TSource MyMaxBy<TSource>(this IEnumerable<TSource> source,
+            MyMaxDelegate<TSource, int> predicate)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+            var enumerable = source.ToList();
+            var result = enumerable.FirstOrDefault();
+
+            foreach (var element in enumerable)
+            {
+                if (predicate(element) > predicate(result))
+                {
+                    result = element;
+                }
+            }
+
+            return result;
         }
 
 

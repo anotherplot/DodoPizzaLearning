@@ -42,6 +42,24 @@ namespace DodoPizzaLearningTests
                     ProductName = "Margheritta",
                     SaleDate = new DateTime(2020, 5, 14),
                     Amount = 3
+                },            
+                new Sale()
+                {
+                    ProductName = "Margheritta",
+                    SaleDate = new DateTime(2021, 5, 14, 1,2,1),
+                    Amount = 5
+                },          
+                new Sale()
+                {
+                    ProductName = "Meats",
+                    SaleDate = new DateTime(2021, 5, 14, 3,1,1),
+                    Amount = 4
+                },            
+                new Sale()
+                {
+                    ProductName = "Meats",
+                    SaleDate = new DateTime(2021, 5, 14, 10,1,1),
+                    Amount = 3
                 },
             };
         }
@@ -49,19 +67,12 @@ namespace DodoPizzaLearningTests
         [Test]
         [TestCase("2020-5-14", "Margheritta", 3)]
         [TestCase("2019-2-14", "Pepperoni", 11)]
+        [TestCase("2021-5-14 11:00:21", "Meats", 7)]
         public void ShouldReturnHighestSoldProduct(DateTime salesDate, string productName, int amount)
         {
             var highestSoldProduct = LinqMethods.GetHighestSoldProduct(_sales, salesDate);
-            Assert.AreEqual(productName, highestSoldProduct.ProductName);
+            Assert.AreEqual(productName, highestSoldProduct.Name);
             Assert.AreEqual(amount, highestSoldProduct.Amount);
-        }
-
-        [Test]
-        [TestCase("2021-5-14", "Margheritta", 1)]
-        public void ShouldReturnNull_WhenNoSalesFound(DateTime salesDate, string productName, int amount)
-        {
-            var highestSoldProduct = LinqMethods.GetHighestSoldProduct(_sales, salesDate);
-            Assert.IsNull(highestSoldProduct);
         }
     }
 }
