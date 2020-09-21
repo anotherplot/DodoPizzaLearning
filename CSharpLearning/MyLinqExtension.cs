@@ -10,8 +10,6 @@ namespace CSharpLearning
 
         public delegate TResult MySelectDelegate<TSource, TResult>(TSource source);
 
-        public delegate TResult MyMaxDelegate<TSource, TResult>(TSource source);
-
         public static IEnumerable<TSource> MyWhere<TSource>(this IEnumerable<TSource> source,
             MyWhereDelegate<TSource> predicate)
         {
@@ -42,24 +40,21 @@ namespace CSharpLearning
             }
         }
 
-        public static TSource MyMaxBy<TSource>(this IEnumerable<TSource> source,
-            MyMaxDelegate<TSource, int> predicate)
+        public static TSource MyMaxBy<TSource, TValue>(this IEnumerable<TSource> source,
+            Func<TSource, TValue> selector)
+            where TValue : IComparable<TValue>
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
 
-            var enumerable = source.ToList();
-            var result = enumerable.FirstOrDefault();
-
-            foreach (var element in enumerable)
+            return source.Aggregate((previous, current) =>
             {
-                if (predicate(element) > predicate(result))
+                if (selector(previous).CompareTo(selector(current)) > 0)
                 {
-                    result = element;
+                    return previous;
                 }
-            }
-
-            return result;
+                return current;
+            });
         }
 
 
