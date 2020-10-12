@@ -29,16 +29,14 @@ namespace CSharpLearning.DSL
             return this;
         }
 
-        public DepartmentBuilder WithUnits(params Action<UnitBuilder>[] builderSteps)
+        public DepartmentBuilder WithUnits(params Func<UnitBuilder, Unit>[] builderSteps)
         {
             _units = new List<Unit>();
 
             foreach (var setup in builderSteps)
             {
                 var builder = Create.Unit;
-                setup(builder);
-                var unit = builder.Please();
-                _units.Add(unit);
+                _units.Add( setup(builder));
             }
 
             return this;
