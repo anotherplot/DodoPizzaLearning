@@ -42,13 +42,26 @@ namespace CSharpLearning
         public static IEnumerable<Order> GetFraudOrders(IEnumerable<Order> allOrders, TimeSpan minCookingTime,
             TimeSpan minTotalTime, TimeSpan maxTotalTime)
         {
-            var fraudOrders = allOrders.Where(o =>
-            {
-                var orderTotalTime = o.Products.Max(p => p.GivenOutAt) - o.QueuedAt;
-                return o.Products.Any(p => p.PackedAt - p.StartedCookingAt < minCookingTime)
-                       || orderTotalTime  > maxTotalTime
-                           || orderTotalTime < minTotalTime;
-            });
+            
+            var fraudOrders = allOrders
+                .Select(o => new {
+                    Order = o,
+                    LastProductGivenOutTime = o.Products.Max(p => p.GivenOutAt),
+                    ProductCookingTimes = o.Products.Select(p => p.PackedAt - p.StartedCookingAt),
+                    
+                })
+                .Select(x => new {
+                    x.Order,
+                    TotalTime = x.LastProductGivenOutTime - x.Order.QueuedAt,
+                    FastestProductCookingTime = x.ProductCookingTimes.Min()
+                })
+                .Select(x => new {
+                    x.Order,
+                    HasTotalTimeFraud = x.TotalTime < minTotalTime || x.TotalTime > maxTotalTime,
+                    HasCookingTimeFraud = x.FastestProductCookingTime < minCookingTime,
+                })
+                .Where(x => x.HasCookingTimeFraud || x.HasTotalTimeFraud)
+                .Select(x => x.Order);
             return fraudOrders;
         }
     }
