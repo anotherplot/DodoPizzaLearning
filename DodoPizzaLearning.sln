@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLearning", "CSharpLea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DodoPizzaLearningTests", "DodoPizzaLearningTests\DodoPizzaLearningTests.csproj", "{57398A3B-CDC0-4A24-BA55-12087A735360}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{06D263DA-D92C-4332-91E5-FADEE08E7C7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{57398A3B-CDC0-4A24-BA55-12087A735360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57398A3B-CDC0-4A24-BA55-12087A735360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57398A3B-CDC0-4A24-BA55-12087A735360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06D263DA-D92C-4332-91E5-FADEE08E7C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D263DA-D92C-4332-91E5-FADEE08E7C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06D263DA-D92C-4332-91E5-FADEE08E7C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06D263DA-D92C-4332-91E5-FADEE08E7C7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
