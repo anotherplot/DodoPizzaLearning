@@ -5,25 +5,24 @@ namespace Asynchronous
 {
     class Program
     {
-        public static bool isActionCalled;
-
         static void Main(string[] args)
         {
-            var isCarArrived = false;
             MoveCarSync();
             MoveCarSync();
         }
 
         static void MoveCarSync()
         {
-            MoveCar(MoveCar);
 
+            var isActionCalled = false;
+            
+            MoveCar(MoveCar);
+            
             while (!isActionCalled)
             {
                 Thread.Sleep(1000);
+                isActionCalled = true;
             }
-
-            isActionCalled = false;
         }
 
         static void MoveCar(Action callback)
@@ -39,7 +38,6 @@ namespace Asynchronous
         static void MoveCar()
         {
             Console.WriteLine("Car arrived");
-            isActionCalled = true;
         }
     }
 }
