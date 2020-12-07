@@ -15,12 +15,15 @@ namespace Asynchronous
         {
             var isActionCalled = false;
 
-            MoveCar(MoveCar);
+            MoveCar(() =>
+            {
+                Console.WriteLine("Car arrived");
+                isActionCalled = true;
+            });
 
             while (!isActionCalled)
             {
                 Thread.Sleep(1000);
-                isActionCalled = true;
             }
         }
 
@@ -31,12 +34,7 @@ namespace Asynchronous
             {
                 callback();
                 t?.Dispose();
-            }, null, 1000, Int32.MaxValue);
-        }
-
-        static void MoveCar()
-        {
-            Console.WriteLine("Car arrived");
+            }, null, 5000, Int32.MaxValue);
         }
     }
 }
