@@ -13,11 +13,10 @@ namespace Asynchronous
 
         static void MoveCarSync()
         {
-
             var isActionCalled = false;
-            
+
             MoveCar(MoveCar);
-            
+
             while (!isActionCalled)
             {
                 Thread.Sleep(1000);
