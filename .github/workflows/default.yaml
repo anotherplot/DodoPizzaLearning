@@ -11,7 +11,7 @@ jobs:
 
       - name: Compile
         run: |
-          CSharpLearning/scripts
+          CSharpLearning/scripts/compile.sh
   my_second_job:
     name: My second job
     runs-on: ubuntu-latest
