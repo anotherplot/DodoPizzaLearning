@@ -1,1 +1,1 @@
-grep -v 'a' src/code.tt
+grep -v 'a' CSharpLearning/src/code.tt
