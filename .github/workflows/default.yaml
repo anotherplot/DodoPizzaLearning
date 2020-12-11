@@ -9,3 +9,13 @@ jobs:
       - name: Greeting
         run: |
           echo "Hello, world!"
+      - name: Goodbye
+        run: |
+          echo "Goodbye, world!"
+  my_second_job:
+    name: My second job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greeting from second job
+        run: |
+          echo "Hello, world from 2nd job"
