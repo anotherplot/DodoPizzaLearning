@@ -6,16 +6,9 @@ jobs:
     name: Compile job
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Compile
-        run: |
-          CSharpLearning/scripts/compile.sh
-  my_second_job:
-    name: My second job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Greeting from second job
-        run: |
-          echo "Hello, world from 2nd job"
+  - name: Slack notify
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_TITLE: This is my notification
+        SLACK_MESSAGE: Hello from Olya
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
