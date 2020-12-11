@@ -3,15 +3,15 @@ on: push
 
 jobs:
   my_first_job:
-    name: My first job
+    name: Compile job
     runs-on: ubuntu-latest
     steps:
-      - name: Greeting
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Compile
         run: |
-          echo "Hello, world!"
-      - name: Goodbye
-        run: |
-          echo "Goodbye, world!"
+          scripts/compile.sh
   my_second_job:
     name: My second job
     runs-on: ubuntu-latest
