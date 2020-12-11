@@ -6,9 +6,9 @@ jobs:
     name: Compile job
     runs-on: ubuntu-latest
     steps:
-  - name: Slack notify
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_TITLE: This is my notification
-        SLACK_MESSAGE: Hello from Olya
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Slack notify
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: This is my notification
+          SLACK_MESSAGE: Hello from Dima
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
