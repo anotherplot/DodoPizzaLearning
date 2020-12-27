@@ -10,5 +10,5 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: This is my notification
-          SLACK_MESSAGE: Hello from Dima
+          SLACK_MESSAGE: Hello from Olya
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
