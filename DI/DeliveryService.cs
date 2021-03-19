@@ -1,43 +1,57 @@
 using System;
 using System.Threading.Tasks;
+using System.Device;
+using System.Device.Location;
 
 namespace DI
 {
-    public class DeliveryService {
-        private readonly GoogleMapsClient _maps;
-        public DeliveryService(GoogleMapsClient maps) {
+    public class DeliveryService
+    {
+        private readonly IMapsClient _maps;
+
+        public DeliveryService(IMapsClient maps)
+        {
             _maps = maps;
         }
+
         // "Прикинуть" расстояние между адресом пиццерии и клиента
-        public async Task<DistanceEstimation> EstimateDistance(string pizzeriaAddress, string customerAddress) {
+        public async Task<DistanceEstimation> EstimateDistance(string pizzeriaAddress, string customerAddress)
+        {
             var pizzeriaCoordinates = await _maps.GetAddressCoordinates(pizzeriaAddress);
             var customerCoordinates = await _maps.GetAddressCoordinates(customerAddress);
 
-            return DistanceEstimation.Near;
-            // return pizzeriaCoordinates.RawDistanceTo(customerCoordinates) switch
-            // {
-            //     // Меньше 3 км - рядом
-            //     < 3 => DistanceEstimation.Near,
-            //     // от 3 до 10 км - далековато
-            //     < 10 => DistanceEstimation.SomewhatFar,
-            //     // больше 10 км - очень далеко
-            //     _ => DistanceEstimation.VeryFar
-            // };
+            // return DistanceEstimation.Near;
+            var rawDistance = pizzeriaCoordinates.RawDistanceTo(customerCoordinates);
+            return rawDistance switch
+            {
+                _ when rawDistance < 3 => DistanceEstimation.Near,
+                _ when rawDistance < 10 => DistanceEstimation.SomewhatFar,
+                _ => DistanceEstimation.VeryFar
+            };
         }
-        
     }
-    public struct Coordinates {
+
+    public struct Coordinates
+    {
         public float Longitude { get; set; }
         public float Latitude { get; set; }
 
-        public float RawDistanceTo(Coordinates otherCoords) {
+        const int EarthRadius = 6371;
+
+        public float RawDistanceTo(Coordinates otherCoords)
+        {
             // Тут хитроумный алгоритм из двух координат с долготой и широтой в градусах
             // вычисляет расстояние в километрах
-            return 9f;
+
+            var sCoord = new GeoCoordinate(Latitude, Longitude);
+            var eCoord = new GeoCoordinate(otherCoords.Latitude, otherCoords.Longitude);
+
+            return (float) sCoord.GetDistanceTo(eCoord);
         }
     }
 
-    public enum DistanceEstimation {
+    public enum DistanceEstimation
+    {
         Near,
         SomewhatFar,
         VeryFar

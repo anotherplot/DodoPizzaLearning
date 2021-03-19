@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DodoPizzaLearningTests", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{06D263DA-D92C-4332-91E5-FADEE08E7C7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksTests", "TasksTests\TasksTests.csproj", "{ABD3BA0E-374F-4747-B6F1-5ECD063EE1B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{ABD3BA0E-374F-4747-B6F1-5ECD063EE1B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveCarTest", "MoveCarTest\MoveCarTest.csproj", "{1F2F705D-0C03-40D0-BF3F-A20341098759}"
 EndProject

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace DI
 {
-    public class GoogleMapsClient {
+    public class GoogleMapsClient : IMapsClient {
         public Task<Coordinates> GetAddressCoordinates(string address) {
             // А тут у нас поднимается HttpClient, ему прокидывается токен, и мы идём в гугл карты
             // Само собой за деньги
